@@ -42,18 +42,25 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= movie.title %></h5>
                             <p class="card-text">⭐ <strong>Rating:</strong> <%= movie.rating %>/10</p>
-                            <p class="card-text">📅 <strong>Watched:</strong> <%= movie.watched_date %></p>
+                            <p class="card-text">📅 <strong>Watched:</strong>
+                                <%= movie.watched_date ? new Date(movie.watched_date).toISOString().split('T')[0].split('-').reverse().join('/') : "Invalid Date" %>
+                            </p>
                             <p class="card-text">📝 <strong>Notes:</strong> <%= movie.notes %></p>
 
-                            <!-- Edit Movie Form -->
-                            <form action="/edit" method="POST" class="d-inline">
-                                <input type="hidden" name="id" value="<%= movie.id %>">
-                                <input type="text" name="title" class="form-control my-1" value="<%= movie.title %>" required>
-                                <input type="number" name="rating" class="form-control my-1" value="<%= movie.rating %>" required min="1" max="10">
-                                <input type="date" name="watched_date" class="form-control my-1" value="<%= movie.watched_date %>" required>
-                                <input type="text" name="notes" class="form-control my-1" value="<%= movie.notes %>">
-                                <button type="submit" class="btn btn-warning btn-sm">✏️ Edit</button>
-                            </form>
+                            <!-- Edit Button (Toggles the Edit Form) -->
+                            <button type="button" class="btn btn-warning btn-sm" onclick="toggleEdit('<%= movie.id %>')">✏️ Edit</button>
+
+                            <!-- Hidden Edit Form -->
+                            <div id="edit-form-<%= movie.id %>" style="display: none;">
+                                <form action="/edit" method="POST" class="mt-2">
+                                    <input type="hidden" name="id" value="<%= movie.id %>">
+                                    <input type="text" name="title" class="form-control my-1" value="<%= movie.title %>" required>
+                                    <input type="number" name="rating" class="form-control my-1" value="<%= movie.rating %>" required min="1" max="10">
+                                    <input type="date" name="watched_date" class="form-control my-1" value="<%= new Date(movie.watched_date).toISOString().split('T')[0] %>" required>
+                                    <input type="text" name="notes" class="form-control my-1" value="<%= movie.notes %>">
+                                    <button type="submit" class="btn btn-success btn-sm">✅ Save</button>
+                                </form>
+                            </div>
 
                             <!-- Delete Movie Form -->
                             <form action="/delete" method="POST" class="d-inline">
@@ -68,5 +75,16 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleEdit(movieId) {
+            var form = document.getElementById("edit-form-" + movieId);
+            if (form.style.display === "none") {
+                form.style.display = "block";
+            } else {
+                form.style.display = "none";
+            }
+        }
+    </script>
+
 </body>
 </html>
