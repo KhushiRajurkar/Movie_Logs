@@ -1,4 +1,4 @@
-# 🎬 Movie Notes CRUD App  
+# 🎬 Movie Notes App  
 
 A **simple web application** to store and manage your favorite **movies**!  
 Built with **Node.js, Express, PostgreSQL, EJS, and Axios**, it allows users to **add, edit, and delete** movie entries along with ratings, notes, and posters fetched from the **OMDb API**.  
@@ -28,9 +28,53 @@ Built with **Node.js, Express, PostgreSQL, EJS, and Axios**, it allows users to 
 
 ---
 
-## 💻 Installation & Setup  
+# 💻 Setup Guide for Movie Notes CRUD App  
 
-### 1️⃣ Clone the Repository  
+Follow these steps to set up and run the **Movie Notes CRUD App** locally on your machine.  
+
+---
+
+## 🚀 Prerequisites  
+
+Before you begin, make sure you have:  
+✅ **Node.js** installed – [Download Node.js](https://nodejs.org/)  
+✅ **PostgreSQL** installed – [Download PostgreSQL](https://www.postgresql.org/download/)  
+✅ A **GitHub account** to clone the repository  
+
+---
+
+## 📦 Step 1: Clone the Repository  
 ```sh
 git clone https://github.com/KhushiRajurkar/Movie_Logs.git
 cd Movie_Logs
+```
+## 📥 Step 2: Install Dependencies
+```sh
+npm install
+```
+## 🔑 Step 3: Set Up Environment Variables
+```sh
+OMDB_API_KEY=your_api_key_here
+```
+## 🛢️ Step 4: Set Up PostgreSQL Database
+1️⃣ Open PostgreSQL CLI (psql)
+
+2️⃣ Run the following SQL commands to create your database:
+```sh
+CREATE DATABASE movies_db;
+\c movies_db
+
+CREATE TABLE movies (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 10),
+    watched_date DATE NOT NULL,
+    notes TEXT,
+    poster_url TEXT
+);
+```
+## 🚀 Step 5: Start the Server
+```sh
+node index.js
+
+```
