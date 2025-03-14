@@ -24,7 +24,7 @@ Built with **Node.js, Express, PostgreSQL, EJS, and Axios**, it allows users to 
 ---
 
 ## 📸 Screenshots  
-![image](https://github.com/user-attachments/assets/044d0452-6c66-47ee-bb4b-6138138e3fdd)
+![image](https://github.com/user-attachments/assets/e1ddef74-eebd-4048-a6e2-488dcd73a8d0)
 
 ---
 
